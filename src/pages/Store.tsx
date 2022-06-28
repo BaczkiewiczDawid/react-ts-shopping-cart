@@ -8,7 +8,7 @@ const Store = () => {
       <h1 className="font-bold ml-16 text-3xl mt-16">Store</h1>
       <div className="flex flex-col md:flex-row flex-wrap">
         {items.map((item) => {
-          return <StoreItem {...item} />;
+          return <StoreItem key={item.id} {...item} />;
         })}
       </div>
     </>

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import ShoppingCart from "../../assets/images/cart.svg";
+import { useShoppingCart } from '../context/ShoppingCartContext'
 
 const Navbar = () => {
+  const { openCart } = useShoppingCart()
+
   return (
     <div className=" h-12 flex items-center shadow-xl justify-between">
       <div>
@@ -15,7 +18,7 @@ const Navbar = () => {
           About
         </Link>
       </div>
-      <div className="border-black rounded-xl border-1 mr-16 cursor-pointer">
+      <div className="border-black rounded-xl border-1 mr-16 cursor-pointer" onClick={openCart}>
         <img className="w-6 h-auto" src={ShoppingCart} alt="shopping cart" />
       </div>
     </div>

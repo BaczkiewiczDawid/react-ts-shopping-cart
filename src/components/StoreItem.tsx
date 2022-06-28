@@ -13,10 +13,9 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
     increaseCartQuantity,
     decreaseCartQuantity,
     removeFromCart,
-  } = useShoppingCart();
-  const quantity: number = getItemQuantity(id);
-
-  console.log(quantity)
+  } = useShoppingCart()
+  
+  const quantity = getItemQuantity(id)
 
   return (
     <div
@@ -47,7 +46,7 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
               +
             </button>
           </div>
-          <button className="bg-red-400 text-white px-6 py-2 rounded mt-8 hover:bg-red-500 duration-200">
+          <button className="bg-red-400 text-white px-6 py-2 rounded mt-8 hover:bg-red-500 duration-200" onClick={() => removeFromCart(id)}>
             Remove
           </button>
         </>
