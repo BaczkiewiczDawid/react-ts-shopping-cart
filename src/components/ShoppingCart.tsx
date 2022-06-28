@@ -9,11 +9,14 @@ type ShoppingCartProps = {
 const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
   const { closeCart, removeFromCart, cartItems } = useShoppingCart();
 
-  let itemsList: any = []
+  let itemsList: (string | number)[] = []
 
   cartItems.forEach((el) => {
-    const foundedItem = items.find((item) => item.id === el.id);
-    itemsList.push(foundedItem);
+    const foundedItem: any = (items.find((item) => item.id === el.id))!;
+    
+    if (typeof foundedItem !== undefined) {
+      itemsList.push(foundedItem);
+    }
   });
 
   let priceList: number[] = [];
