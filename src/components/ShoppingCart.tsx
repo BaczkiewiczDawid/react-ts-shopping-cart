@@ -1,14 +1,28 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import CartItem from "./CartItem";
+import items from "../data/items.json";
 
 type ShoppingCartProps = {
   isOpen: boolean;
 };
 
 const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
-  const { closeCart, removeFromCart , cartItems } = useShoppingCart();
+  const { closeCart, removeFromCart, cartItems } = useShoppingCart();
 
-  console.log(cartItems)
+  let itemsList: any = []
+
+  cartItems.forEach((el) => {
+    const foundedItem = items.find((item) => item.id === el.id);
+    itemsList.push(foundedItem);
+  });
+
+  let priceList: number[] = [];
+
+  itemsList.forEach((el: any) => {
+    priceList.push(el.price)
+  })
+
+  const totalPrice = priceList.reduce((prev, curr) => prev + curr, 0)
 
   return (
     <>
@@ -24,8 +38,18 @@ const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
             </span>
           </div>
           {cartItems.map((item) => {
-            return <CartItem id={item.id} quantity={item.quantity} removeFromCart={removeFromCart} />
+            return (
+              <CartItem
+                id={item.id}
+                quantity={item.quantity}
+                removeFromCart={removeFromCart}
+              />
+            );
           })}
+          <div className="mt-12 w-full flex items-end flex-col">
+            <h4 className="font-bold mr-12">Total price</h4>
+            <span className="font-light mr-12">${totalPrice}</span>
+          </div>
         </div>
       ) : null}
     </>

@@ -9,6 +9,8 @@ type Item = {
 const CartItem = ({ id, quantity, removeFromCart }: Item) => {
     const item = itemsList.find((el) => el.id === id)
 
+    const totalPrice: number = item!.price * quantity;
+
   return (
     <>
       <div className="flex items-center p-4">
@@ -24,7 +26,7 @@ const CartItem = ({ id, quantity, removeFromCart }: Item) => {
           <p className="font-light">${item!.price}</p>
         </div>
         <div className="flex items-center">
-          <p>${(item!.price) * quantity}</p>
+          <p>${totalPrice}</p>
           <div onClick={() => removeFromCart(id)} className="bg-transparent w-8 h-8 rounded-full border-2 border-red-400 text-red-400 cursor-pointer items-center">
             <span>X</span>
           </div>
